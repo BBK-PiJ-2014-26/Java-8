@@ -11,7 +11,7 @@ interface StringComparator extends Comparator<String> {
 }
 
 /**
- * Answers Q1 Lambda Expressions
+ * Answers Q1 and Q2 Lambda Expressions
  */
 public class StringSorter {
 
@@ -20,23 +20,16 @@ public class StringSorter {
 		String [] strArray  = {"batman", "superman", "wonder woman", "martian manhunter",
 			"black canary", "green arrow", "the atom", "the flash", "eclipso", "Echo"};
 			
+		StringComparator firstChar = (t1, t2) -> t1.charAt(0) - t2.charAt(0);
+		printArray(strArray,"In First Chracter Order", firstChar);
+			
 		StringComparator short2Long = (t1, t2) -> t1.length() - t2.length();	
 		printArray(strArray,"In Length Order: shortest to longest", short2Long);
 		
 		StringComparator long2short = (t1, t2) -> t2.length() - t1.length();
 		printArray(strArray,"In Length Order: longest to shortest", long2short);
 		
-		StringComparator firstChar = (t1, t2) -> t1.charAt(0) - t2.charAt(0);
-		printArray(strArray,"In First Chracter Order", firstChar);
-		
-		StringComparator eGoesFirst = (t1, t2) -> {
-			int result = 0;
-			Character c = t1.charAt(0);
-			if (c.equals('e') || c.equals('E')) {
-				result = -1;
-			}
-			return result;
-		};
+		StringComparator eGoesFirst = (t1, t2) -> eChecker(t1, t2);
 		printArray(strArray,"\"e\" goes first", eGoesFirst);
 
 	}
@@ -45,10 +38,17 @@ public class StringSorter {
 		System.out.println(orderType);
 		List<String> list = Arrays.asList(strArray);
 		Collections.sort(list, comparator);
-		Object[] o = list.toArray();
-		for (Object element : o) {
-			System.out.println(element);
-		}
-		System.out.println("");
+		System.out.println(list + "\n");
+	}
+	
+	private static int eChecker(String t1, String t2) {
+		int result = 0;
+		Character c = t1.charAt(0);
+		if (c.equals('e') || c.equals('E')) {
+			result = -1;
+		} else if (t1.compareTo(t2) > 0) {
+			result = 1;
+		} 
+		return result;
 	}
 }
