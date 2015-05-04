@@ -11,14 +11,14 @@ interface StringComparator extends Comparator<String> {
 }
 
 /**
- * Answers Q1 Lambda Expressions 1.
+ * Answers Q1 Lambda Expressions
  */
 public class StringSorter {
 
 	public static void main(String[] args) {
 	
 		String [] strArray  = {"batman", "superman", "wonder woman", "martian manhunter",
-			"black canary", "green arrow", "the atom", "the flash"};
+			"black canary", "green arrow", "the atom", "the flash", "eclipso", "Echo"};
 			
 		StringComparator short2Long = (t1, t2) -> t1.length() - t2.length();	
 		printArray(strArray,"In Length Order: shortest to longest", short2Long);
@@ -28,6 +28,16 @@ public class StringSorter {
 		
 		StringComparator firstChar = (t1, t2) -> t1.charAt(0) - t2.charAt(0);
 		printArray(strArray,"In First Chracter Order", firstChar);
+		
+		StringComparator eGoesFirst = (t1, t2) -> {
+			int result = 0;
+			Character c = t1.charAt(0);
+			if (c.equals('e') || c.equals('E')) {
+				result = -1;
+			}
+			return result;
+		};
+		printArray(strArray,"\"e\" goes first", eGoesFirst);
 
 	}
 	
