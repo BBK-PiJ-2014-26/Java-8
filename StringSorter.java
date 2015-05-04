@@ -25,6 +25,9 @@ public class StringSorter {
 		
 		StringComparator long2short = (t1, t2) -> t2.length() - t1.length();
 		printArray(strArray,"In Length Order: longest to shortest", long2short);
+		
+		StringComparator firstChar = (t1, t2) -> t1.charAt(0) - t2.charAt(0);
+		printArray(strArray,"In First Chracter Order", firstChar);
 
 	}
 	
@@ -36,5 +39,6 @@ public class StringSorter {
 		for (Object element : o) {
 			System.out.println(element);
 		}
+		System.out.println("");
 	}
 }
